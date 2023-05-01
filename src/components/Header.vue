@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Header></Header>
+    <NavBar></NavBar>
   </div>
 </template>
 
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
+import NavBar from './NavBar.vue';
 </script>
 
 <style scoped></style>
