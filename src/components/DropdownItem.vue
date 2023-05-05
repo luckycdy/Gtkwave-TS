@@ -1,7 +1,7 @@
 <template>
   <button
     name="dropdown-item"
-    class="hover:bg-slate-300 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+    class="bg-white hover:bg-slate-300 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
   >
     <slot>
       <li class="flex flex-1 items-center justify-between px-3">

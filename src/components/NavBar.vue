@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container flex h-10 items-center border-b-2 border-solid border-gray-300"
+    class="flex h-10 w-full items-center border-b-2 border-solid border-gray-300"
     ref="navBarRef"
   >
     <NavItem
