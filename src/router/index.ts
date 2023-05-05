@@ -5,7 +5,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'gtkwave',
-    component: () => import('@/views/Gtkwave.vue'),
+    component: () => import('@/views/GtkWave.vue'),
   },
 ]
 
