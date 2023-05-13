@@ -14,17 +14,17 @@
         <p class="text-right">{{ rightText }}</p>
       </li>
     </slot>
-    <slot name="children" v-if="children">
+    <slot v-if="children" name="children">
       <div class="dropdown-wrapper invisible relative -top-10 translate-x-full">
         <ul class="absolute flex flex-col border">
           <DropdownItem
             v-for="(child, key) in children"
+            :key="key"
             :left-text="child.leftText"
             :right-text="child.rightText"
             :class="child.class"
             :is-select="child.isSelect?.value"
             :disabled="child.isDisabled?.value"
-            :key="key"
             :children="child.children"
           >
           </DropdownItem>
@@ -35,19 +35,14 @@
 </template>
 
 <script setup lang="tsx">
-import DropdownItem from "@/components/DropdownItem.vue";
-import type { ItemProp } from "./NavItemData";
-withDefaults(
-  defineProps<{
-    leftText?: string;
-    rightText?: string;
-    isSelect?: boolean;
-    children?: ItemProp[];
-  }>(),
-  {
-    isSelect: false,
-  }
-);
+import DropdownItem from '@/components/DropdownItem.vue'
+import type { ItemProp } from './NavItemData'
+defineProps<{
+  leftText?: string
+  rightText?: string
+  isSelect?: boolean
+  children?: ItemProp[]
+}>()
 </script>
 
 <style scoped>

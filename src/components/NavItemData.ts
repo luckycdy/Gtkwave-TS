@@ -326,7 +326,7 @@ const navItemsData: Record<string, ItemProp[]> = {
       ],
     },
   ],
-  view: [
+  View: [
     {
       leftText: 'Show Grid',
       rightText: 'Alt+G',
