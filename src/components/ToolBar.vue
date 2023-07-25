@@ -24,13 +24,13 @@
         <p>Zoom Fit</p>
       </template>
     </ToolBarItem>
-    <ToolBarItem @click="handleTool">
+    <ToolBarItem @click="zoomIn">
       <button class="font-bold">➕</button>
       <template #prompt>
         <p>Zoom In</p>
       </template>
     </ToolBarItem>
-    <ToolBarItem @click="handleTool">
+    <ToolBarItem @click="zoomOut">
       <button class="font-bold">➖</button>
       <template #prompt>
         <p>Zoom Out</p>
@@ -99,14 +99,19 @@
       </template>
     </ToolBarItem>
     <ToolBarItem class="min-w-max px-3" @click="handleTool">
-      <span>Marker: | Cursor: 0 sec</span>
+      <span
+        >Marker: {{ store.markerCursor ? `${store.markerCursor}sec` : '-' }} |
+        Cursor: {{ store.waveParams.cursorTime }} sec</span
+      >
     </ToolBarItem>
   </div>
 </template>
 
 <script setup lang="ts">
+import useStore from '@/stores/store'
 import ToolBarItem from './ToolBarItem.vue'
-
+import { zoomIn, zoomOut } from './ToolFun'
+const store = useStore()
 const handleTool = () => {
   console.log(111)
 }

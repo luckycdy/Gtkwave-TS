@@ -1,7 +1,8 @@
 <template>
   <button
     name="dropdown-item"
-    class="bg-white hover:bg-slate-300 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+    class="bg-white hover:bg-slate-300 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-gray-200"
+    :disabled="isDisabled"
   >
     <slot>
       <li class="flex flex-1 items-center justify-between px-3">
@@ -24,8 +25,9 @@
             :right-text="child.rightText"
             :class="child.class"
             :is-select="child.isSelect?.value"
-            :disabled="child.isDisabled?.value"
+            :disabled="child.isDisabled"
             :children="child.children"
+            @click="child.callback && child.callback()"
           >
           </DropdownItem>
         </ul>
@@ -41,7 +43,9 @@ defineProps<{
   leftText?: string
   rightText?: string
   isSelect?: boolean
+  isDisabled?: boolean
   children?: ItemProp[]
+  action?: () => void
 }>()
 </script>
 

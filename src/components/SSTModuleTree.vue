@@ -4,8 +4,8 @@
       <div
         class="relative cursor-pointer"
         :class="{
-          'bg-green-500 rounded-md outline outline-green-700 outline-1':
-            name === store.curModule,
+          'rounded-md bg-green-500 outline outline-1 outline-green-700':
+            name === store.curSSTModule,
         }"
         @click="toggleShow(name as string)"
       >
@@ -54,9 +54,9 @@ const toggleShow = (name: string) => {
   } else {
     showTreesSet.value.add(name)
   }
-  if (store.curModule !== name) {
-    store.curSignals.clear()
-    store.curModule = name
+  if (store.curSSTModule !== name) {
+    store.curSSTSignals.clear()
+    store.curSSTModule = name
   }
 }
 defineProps<{
