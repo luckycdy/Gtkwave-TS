@@ -1,7 +1,6 @@
 <template>
   <!-- 创建一个导航栏，包含多个 NavItem 组件 -->
   <div
-    ref="navBarRef"
     class="flex h-10 w-full items-center border-b-2 border-solid border-gray-300"
   >
     <!-- 遍历 navItems，并为每个条目创建一个 NavItem 组件 -->
@@ -19,7 +18,7 @@
         :right-text="item.rightText"
         :class="item.class"
         :is-select="item.isSelect?.value"
-        :disabled="item.isDisabled?.value"
+        :disabled="item.isDisabled"
         :children="item.children"
       >
       </DropdownItem>
@@ -36,7 +35,6 @@ import type { ItemProp } from '@/components/NavItemData'
 const props = defineProps<{
   navItems?: Record<string, ItemProp[]>
 }>()
-const navBarRef = ref<null | HTMLElement>(null)
 const navItemsRef = ref<Array<InstanceType<typeof NavItem>>>([])
 onMounted(() => {
   if (navItemsRef.value && props.navItems) {

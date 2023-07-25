@@ -1,18 +1,23 @@
 <template>
-  <div class="mx-2 my-4">
+  <div>
     <button @click="showSST = !showSST">
       <span v-if="showSST">▽</span>
       <span v-else>▷</span>
-      <span class="align-middle ml-2">SST</span>
+      <span class="ml-2 align-middle">SST</span>
     </button>
-    <div v-show="showSST" class="w-96">
-      <div class="h-96 rounded-lg border bg-white p-2 overflow-auto">
-        <SSTModuleTree :tree-data="store.modules" />
+    <div
+      :class="{ invisible: !showSST }"
+      class="flex h-full w-96 flex-col justify-between"
+    >
+      <div>
+        <div class="h-96 overflow-auto rounded-lg border bg-white p-2">
+          <SSTModuleTree :tree-data="store.modules" />
+        </div>
+        <div class="mt-5 rounded-lg border bg-white p-1">
+          <SSTSignals />
+        </div>
       </div>
-      <div class="rounded-lg border bg-white p-1 mt-5">
-        <SSTSignals />
-      </div>
-      <SSTButtons />
+      <SSTButtons class="mb-3" />
     </div>
   </div>
 </template>
@@ -24,7 +29,7 @@ import SSTSignals from './SSTSignals.vue'
 import SSTButtons from './SSTButtons.vue'
 import useStore from '@/stores/store'
 const store = useStore()
-store.getModules('dump2')
+store.getHeader('dump2')
 const showSST = ref(true)
 </script>
 

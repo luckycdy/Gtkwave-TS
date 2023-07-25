@@ -1,3 +1,4 @@
+import useStore from '@/stores/store'
 import { ref, type Ref } from 'vue'
 
 export interface ItemProp {
@@ -5,10 +6,197 @@ export interface ItemProp {
   rightText?: string
   class?: string
   isSelect?: Ref<boolean>
-  isDisabled?: Ref<boolean>
+  isDisabled?: boolean
   children?: Array<ItemProp>
   callback?: () => void
 }
+const store = useStore()
+
+const menuItemsData: ItemProp[] = [
+  {
+    leftText: 'Data Fromat',
+    rightText: '▶',
+    children: [
+      { leftText: 'Hex', rightText: 'Alt+X' },
+      { leftText: 'Decimal', rightText: 'Alt+D' },
+      { leftText: 'Signed Decimal' },
+      { leftText: 'Binary', rightText: 'Alt+B' },
+      { leftText: 'Octal', rightText: 'Alt+O' },
+      { leftText: 'ASCII' },
+      { leftText: 'Time' },
+      { leftText: 'Enum' },
+      { leftText: 'BitsToReal' },
+      {
+        leftText: 'RealToBits',
+        rightText: '▶',
+        children: [{ leftText: 'On' }, { leftText: 'Off' }],
+      },
+      {
+        leftText: 'Right Justify',
+        rightText: '▶',
+        children: [
+          { leftText: 'On', rightText: 'Alt+J' },
+          { leftText: 'Off', rightText: 'Shift+Alt+J' },
+        ],
+      },
+      {
+        leftText: 'Invert',
+        rightText: '▶',
+        children: [
+          { leftText: 'On', rightText: 'Alt+I' },
+          { leftText: 'Off', rightText: 'Shift+Alt+I' },
+        ],
+      },
+      {
+        leftText: 'Reverse Bits',
+        rightText: '▶',
+        children: [
+          { leftText: 'On', rightText: 'Alt+V' },
+          { leftText: 'Off', rightText: 'Shift+Alt+V' },
+        ],
+      },
+      {
+        leftText: 'Translate Filter File',
+        rightText: '▶',
+        children: [{ leftText: 'Disable' }, { leftText: 'Enable and Select' }],
+      },
+      {
+        leftText: 'Translate Filter Process',
+        rightText: '▶',
+        children: [{ leftText: 'Disable' }, { leftText: 'Enable and Select' }],
+      },
+      {
+        leftText: 'Transaction Filter Process',
+        rightText: '▶',
+        children: [{ leftText: 'Disable' }, { leftText: 'Enable and Select' }],
+      },
+      {
+        leftText: 'Analog',
+        rightText: '▶',
+        children: [
+          { leftText: 'Off' },
+          { leftText: 'Step' },
+          { leftText: 'Interpolated' },
+          { leftText: 'Interpolated Annotated' },
+          {
+            leftText: 'Resizing',
+            rightText: '▶',
+            children: [{ leftText: 'Screen Data' }, { leftText: 'All Data' }],
+          },
+        ],
+      },
+      {
+        leftText: 'Range Fill',
+        rightText: '▶',
+        children: [
+          { leftText: 'With 0s' },
+          { leftText: 'With 1s' },
+          { leftText: 'Off' },
+        ],
+      },
+      {
+        leftText: 'Gray Filters',
+        rightText: '▶',
+        children: [
+          { leftText: 'To Gray' },
+          { leftText: 'From Gray' },
+          { leftText: 'None' },
+        ],
+      },
+      {
+        leftText: 'Popcnt',
+        rightText: '▶',
+        children: [{ leftText: 'On' }, { leftText: 'Off' }],
+      },
+      {
+        leftText: 'Fixed Point Shift',
+        rightText: '▶',
+        children: [
+          { leftText: 'On' },
+          { leftText: 'Off' },
+          { leftText: 'Specify' },
+        ],
+      },
+    ],
+    class: '',
+  },
+  {
+    leftText: 'Color Fromat',
+    rightText: '▶',
+    children: [
+      {
+        leftText: 'Normal',
+        callback() {
+          store.color[store.showSignalIndex] = 'rgb(34 197 94)'
+        },
+      },
+      {
+        leftText: 'Red',
+        callback() {
+          store.color[store.showSignalIndex] = 'red'
+        },
+      },
+      {
+        leftText: 'Orange',
+        callback() {
+          store.color[store.showSignalIndex] = 'orange'
+        },
+      },
+      {
+        leftText: 'Yellow',
+        callback() {
+          store.color[store.showSignalIndex] = 'yellow'
+        },
+      },
+      {
+        leftText: 'Green',
+        callback() {
+          store.color[store.showSignalIndex] = 'green'
+        },
+      },
+      {
+        leftText: 'Blue',
+        callback() {
+          store.color[store.showSignalIndex] = 'blue'
+        },
+      },
+      {
+        leftText: 'Indigo',
+        callback() {
+          store.color[store.showSignalIndex] = 'indigo'
+        },
+      },
+      {
+        leftText: 'Violet',
+        callback() {
+          store.color[store.showSignalIndex] = 'violet'
+        },
+      },
+      { leftText: 'Cycle', isDisabled: true },
+    ],
+    class: 'border-b',
+  },
+  { leftText: 'Insert Analog Height Extension', class: 'border-b' },
+  { leftText: 'Insert Blank' },
+  { leftText: 'Insert Comment' },
+  { leftText: 'Alias Highlighted Trace' },
+  { leftText: 'Remove Highlighted Aliases', class: 'border-b' },
+  { leftText: 'Cut' },
+  { leftText: 'Copy' },
+  { leftText: 'Paste' },
+  {
+    leftText: 'Delete',
+    class: 'border-b',
+    callback() {
+      console.log('delete', store.showSignalIndex)
+      store.showSignals.splice(store.showSignalIndex, 1)
+      store.color.splice(store.showSignalIndex, 1)
+    },
+  },
+  {
+    leftText: 'Open Scope',
+  },
+]
 const navItemsData: Record<string, ItemProp[]> = {
   File: [
     { leftText: 'Open New Window', rightText: 'Ctrl+N' },
@@ -406,4 +594,4 @@ const navItemsData: Record<string, ItemProp[]> = {
   ],
 }
 
-export default navItemsData
+export { navItemsData, menuItemsData }

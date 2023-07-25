@@ -2,16 +2,16 @@
   <div class="">
     <div class="border-b-2 pl-3">
       <span>Type</span>
-      <span class="pl-2 ml-2 border-l-2">Signals</span>
+      <span class="ml-2 border-l-2 pl-2">Signals</span>
     </div>
-    <div class="h-96 overflow-auto p-1">
+    <div class="overflow-auto p-1" style="height: 30rem">
       <div
         v-for="(value, key) in filterSignalsList"
         :key="key"
-        class="pl-3 cursor-pointer"
+        class="mb-0.5 cursor-pointer pl-3"
         :class="{
-          'outline-green-700 rounded-md outline-1 bg-green-500 outline':
-            curSignals?.has(value),
+          'rounded-md bg-green-500 outline outline-1 outline-green-700':
+            curSSTSignals?.has(value),
         }"
         @click="selectSignals(value)"
       >
@@ -29,20 +29,21 @@ import useStore from '@/stores/store'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 const store = useStore()
-const { signalsOfModule, curModule, curSignals, filter } = storeToRefs(store)
+const { signalsOfModule, curSSTModule, curSSTSignals, filter } =
+  storeToRefs(store)
 const filterSignalsList = computed(() => {
   if (filter.value) {
-    return signalsOfModule.value[curModule.value].filter((v) =>
+    return signalsOfModule.value[curSSTModule.value].filter((v) =>
       v.includes(filter.value)
     )
   }
-  return signalsOfModule.value[curModule.value]
+  return signalsOfModule.value[curSSTModule.value]
 })
 const selectSignals = (value: string) => {
-  if (curSignals.value.has(value)) {
-    curSignals.value.delete(value)
+  if (curSSTSignals.value.has(value)) {
+    curSSTSignals.value.delete(value)
   } else {
-    curSignals.value?.add(value)
+    curSSTSignals.value?.add(value)
   }
 }
 </script>

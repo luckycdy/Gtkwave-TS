@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group relative z-10 leading-10 border-b-2 border-transparent hover:border-green-400"
+    class="group relative z-10 border-b-2 border-transparent leading-10 hover:border-green-400"
   >
     <p class="title cursor-pointer px-3">{{ title }}</p>
     <ul
@@ -14,7 +14,6 @@
 <script setup lang="ts">
 defineProps<{
   title: string
-  isShow?: boolean
 }>()
 </script>
 
